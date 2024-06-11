@@ -63,6 +63,10 @@ function deviceToIndex(device) {
     }
 }
 
+const devicePowerColumnIndex = deviceToIndex(device);
+power.push(parseFloat(cols[devicePowerColumnIndex]));
+
+
 // Updated showDeviceChart function to pass selected device to fetchChartData
 function showDeviceChart(device) {
     document.getElementById('deviceIframe').style.display = 'none';
