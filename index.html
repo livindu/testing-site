@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Consumption Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="powerConsumptionChart" width="400" height="200"></canvas>
+
+    <script>
+        // Fetch the CSV data
+        fetch('data.csv')
+            .then(response => response.text())
+            .then(csvData => {
+                // Parse CSV data
+                const rows = csvData.split('\n');
+                const timestamps = [];
+                const powerConsumptionValues = [];
+
+                rows.forEach(row => {
+                    const [timestamp, powerConsumption] = row.split(',');
+                    timestamps.push(timestamp);
+                    powerConsumptionValues.push(parseFloat(powerConsumption));
+                });
+
+                // Create Chart.js chart
+                const ctx = document.getElementById('powerConsumptionChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: timestamps,
+                        datasets: [{
+                            label: 'Power Consumption',
+                            data: powerConsumptionValues,
+                            borderColor: 'blue',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            xAxes: [{
+                                type: 'time',
+                                time: {
+                                    unit: 'day' // Adjust this based on your data resolution
+                                }
+                            }],
+                            yAxes: [{
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Power Consumption'
+                                }
+                            }]
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
