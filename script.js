@@ -45,6 +45,24 @@ function parseCSV(data, device) {
     return { time, power };
 }
 
+// Define a mapping of devices to column indices
+const deviceColumnIndices = {
+    time: 0,
+    main: 1,
+    kettle: 2,
+};
+
+// Function to get the column index for a given device
+function deviceToIndex(device) {
+    // Check if the device exists in the mapping
+    if (device in deviceColumnIndices) {
+        return deviceColumnIndices[device];
+    } else {
+        // Handle case where device is not found (e.g., return a default index or throw an error)
+        return -1; // Return -1 as a default value
+    }
+}
+
 // Updated showDeviceChart function to pass selected device to fetchChartData
 function showDeviceChart(device) {
     document.getElementById('deviceIframe').style.display = 'none';
