@@ -34,7 +34,7 @@ function parseCSV(data, device) {
     const rows = data.split('\n').slice(1); // Remove the header row
     const time = [];
     const power = [];
-    const devicePowerColumn = device + '_power'; // Dynamically select column based on device
+    const devicePowerColumn = `${device}_power`; // Dynamically select column based on device
 
     rows.forEach(row => {
         const cols = row.split(',');
