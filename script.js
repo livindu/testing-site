@@ -20,7 +20,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
 // Modified fetchChartData function to accept device parameter
 function fetchChartData(device) {
-    fetch('data.csv')
+    fetch('https://github.com/livindu/testing-site/blob/main/data.csv')
         .then(response => response.text())
         .then(data => {
             const parsedData = parseCSV(data, device);
